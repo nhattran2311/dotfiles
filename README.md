@@ -31,7 +31,7 @@ Requires Neovim (>= 0.5)
 # Assume you're in your home and it was downloaded to the Downloads folder - move it to a sensible location, e.g.
 mkdir -p ~/.local/share/nvim
 cd ~/.local/share/nvim/
-wget https://github.com/neovim/neovim/releases/download/v0.6.0/nvim.appimage
+wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage
 # Mark it executable
 chmod u+x nvim.appimage && ./nvim.appimage
 # Create .local/bin if it doesn't exist yet, and link the appimage there under the name "nvim"
