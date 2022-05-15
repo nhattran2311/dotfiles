@@ -47,7 +47,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 ```
-
+## Uninstall Neovim
+```
+cd ~/.local/share/nvim/
+rm -rf nvim.appimage
+```
 
 ### Setup Plugin for NeoVim
 I use vim-plug for manage plugin. <br />
