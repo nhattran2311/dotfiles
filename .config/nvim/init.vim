@@ -37,15 +37,16 @@ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 highlight Whitespace ctermfg=Grey
 " Makes comments italic
 highlight Comment cterm=italic
-" set indent
-filetype plugin indent on
+" set indent base on file type
+filetype indent on
 set shiftwidth=2
 set tabstop=2
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
 set backspace=start,eol,indent
-
+" remove auto indent for python and yaml file
+set indentkeys-=0#
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste
 
@@ -104,7 +105,8 @@ if has('nvim')
   au BufRead,BufNewFile .babelrc.js setlocal filetype=javascript
   au BufRead,BufNewFile .sequelizerc setlocal filetype=javascript
   au BufRead,BufNewFile *.hbs setlocal filetype=html
-
+  autocmd BufNewFile,BufReadPost * if &filetype == "python" | set indentkeys-=0# | endif
+  autocmd BufNewFile,BufReadPost * if &filetype == "yaml" | set expandtab shiftwidth=2 indentkeys-=0# | endif
 
   "}}}
 

@@ -1,5 +1,4 @@
-#sudo service cntlm start
-
+sudo service docker start
 # CNTLM Proxy settings
 #export http_proxy="http://localhost:3128"
 #export https_proxy="http://localhost:3128"
