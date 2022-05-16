@@ -124,7 +124,7 @@ if has('nvim')
 	set wildoptions=pum
 	set pumblend=5
 	set background=dark
-	colorscheme dracula
+	colorscheme onedark
 
   runtime ./maps.vim
 endif
