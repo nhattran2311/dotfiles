@@ -29,10 +29,12 @@ if has("nvim")
 	Plug 'preservim/nerdcommenter'
 	Plug 'neoclide/coc.nvim'
 	Plug 'jiangmiao/auto-pairs'
+	Plug 'yggdroot/indentline'
 
 	"theme
 	Plug 'dracula/vim', { 'as': 'dracula' }
-
+	Plug 'joshdick/onedark.vim'
+	
 	"nvim icon
 	Plug 'ryanoasis/vim-devicons'
 
