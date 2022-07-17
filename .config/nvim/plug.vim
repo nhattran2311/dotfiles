@@ -11,6 +11,7 @@ if has("nvim")
 
 	" Any valid git URL is allowed
 	Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+	Plug 'APZelos/blamer.nvim'
 
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -34,7 +35,7 @@ if has("nvim")
 	"theme
 	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'joshdick/onedark.vim'
-	
+  Plug 'tribela/vim-transparent'	
 	"nvim icon
 	Plug 'ryanoasis/vim-devicons'
 
