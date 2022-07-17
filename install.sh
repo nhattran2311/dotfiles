@@ -1,4 +1,5 @@
 #!bin/sh
+#TODO: need make this script work
 printGreen() {
   echo "\e[32m$1\e[0m"
 }
@@ -39,6 +40,28 @@ fi
 
 
 
+
+declare -r PWD=$(pwd)
+declare -r WHOAMI=$(whoami)
+declare -r VIM_PLUG=~/.vim/autoload/plug.vim
+
+#################
+### Setup vimrc ###
+#################
+if $(hash vim); then
+    if [[ ! -f $VIM_PLUG ]]; then
+        curl  --silent -fLo $VIM_PLUG --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/main/plug.vim
+    fi
+    ln -fFs $(pwd)/vimrc ~/.vimrc
+    vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +qall
+
+    if $(hash go); then
+        vim ~/.vim.go +GoInstallBinaries +GoUpdateBinaries +qall
+    fi
+
+else
+    echo "Oops! We could not find vim on your system."
+fi
 
 #copy .profile and .bashrc
 cp .bashrc ~/.bashrc
