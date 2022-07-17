@@ -34,9 +34,7 @@ set showcmd
 set list
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 " Highlight Whitespaces
-highlight Whitespace ctermfg=Grey
-" Makes comments italic
-highlight Comment cterm=italic
+highlight Whitespace ctermfg=LightBlue
 " set indent base on file type
 filetype indent on
 set shiftwidth=2
@@ -49,11 +47,29 @@ set backspace=start,eol,indent
 set indentkeys-=0#
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste
-
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 " Copy to clipboard
-set clipboard+=unnamedplus
+let g:clipboard = {
+      \   'name': 'win32yank-wsl',
+      \   'copy': {
+      \      '+': 'win32yank.exe -i --crlf',
+      \      '*': 'win32yank.exe -i --crlf',
+      \    },
+      \   'paste': {
+      \      '+': 'win32yank.exe -o --lf',
+      \      '*': 'win32yank.exe -o --lf',
+      \   },
+      \   'cache_enabled': 0,
+      \ }
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
 
