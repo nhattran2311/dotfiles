@@ -1,51 +1,226 @@
-local status, packer = pcall(require, "packer")
-if (not status) then
-  print("Packer is not installed")
-  return
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  vim.cmd [[packadd packer.nvim]]
 end
 
-vim.cmd [[packadd packer.nvim]]
+local has = function(x)
+  return vim.fn.has(x) == 1
+end
 
-packer.startup(function(use)
+local executable = function(x)
+  return vim.fn.executable(x) == 1
+end
+
+local is_wsl = (function()
+  local output = vim.fn.systemlist "uname -r"
+  return not not string.find(output[1] or "", "WSL")
+end)()
+
+local is_mac = has "macunix"
+local is_linux = not is_wsl and not is_mac
+
+local max_jobs = nil
+if is_mac then
+  max_jobs = 32
+end
+
+return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
-  }
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'nvim-lua/plenary.nvim' -- Common utilities
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'neovim/nvim-lspconfig' -- LSP
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-  use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
 
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
-  use 'L3MON4D3/LuaSnip'
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
-  use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'folke/zen-mode.nvim'
-  use 'junegunn/goyo.vim'
+  -- Status line
+  use({
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      local status, lualine = pcall(require, "lualine")
+      if (not status) then return end
+      lualine.setup {
+        options = {
+          icons_enabled = true,
+          theme = 'tokyonight',
+          globalstatus = true,
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' },
+          disabled_filetypes = {}
+        },
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch' },
+          lualine_c = { {
+            'filename',
+            file_status = true, -- displays file status (readonly status, modified status)
+            path = 0 -- 0 = just filename, 1 = relative path, 2 = absolute path
+          } },
+          lualine_x = {
+            { 'diagnostics', sources = { "nvim_diagnostic" }, symbols = { error = ' ', warn = ' ', info = ' ',
+              hint = ' ' } },
+            'encoding',
+            'filetype'
+          },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' }
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { {
+            'filename',
+            file_status = true, -- displays file status (readonly status, modified status)
+            path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+          } },
+          lualine_x = { 'location' },
+          lualine_y = {},
+          lualine_z = {}
+        },
+        tabline = {},
+        extensions = { 'fugitive' }
+      }
+    end,
+  })
+
+  -- Theme
+  use({
+   "folke/tokyonight.nvim",
+  })
+
+  -- Git
+  use({
+    "lewis6991/gitsigns.nvim",
+    requires = {
+    },
+  })
 
   use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    "TimUntersberger/neogit",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+    },
+    keys = {
+      "<leader>g",
+    },
+    cmd = {
+      "Neogit",
+    },
+    config = function()
+      require("neogit").setup({
+          disable_commit_confirmation = true,
+          disable_context_highlighting = true,
+          integrations = {
+            diffview = true,
+          },
+      })
+      vim.keymap.set("n", "<leader>gs", ":Neogit kind=split<cr>", { silent = true })
+    end,
   })
-  use 'akinsho/nvim-bufferline.lua'
-  -- use 'github/copilot.vim'
 
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
+  -- Auto pair
+  use({
+    "jiangmiao/auto-pairs"
+  })
+
+  -- Comment
+  use({
+    "tpope/vim-commentary",
+    keys = {
+      { "n", "gc" },
+      { "v", "gc" },
+    },
+    cmd = {
+      "Commentary",
+    }
+  })
+
+  -- Fuzzy search
+  use({
+    "junegunn/fzf.vim",
+    requires = {
+      "junegunn/fzf",
+    },
+    config = function()
+      vim.g.fzf_buffers_jump = 1
+      vim.keymap.set("n", "<leader><leader>", ":GFiles!<cr>'", { silent = true })
+      vim.keymap.set("n", "<leader>ff", ":Files!<cr>'", { silent = true })
+      vim.keymap.set("n", "<leader>fo", ":Files! " .. vim.fn.expand("%:p:h", { silent = true }))
+      vim.keymap.set("n", "<leader>/", ":Rg!<cr>", { silent = true })
+      vim.keymap.set("n", "<leader>bb", ":Buffers!<cr>", { silent = true })
+      vim.keymap.set("n", "<leader>,", ":Buffers!<cr>", { silent = true })
+    end,
+  })
+
+  -- Syntax highlighting and objects
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      local status, ts = pcall(require, "nvim-treesitter.configs")
+      if (not status) then return end
+      ts.setup {
+        highlight = {
+          enable = true,
+          disable = {},
+        },
+        indent = {
+          enable = true,
+          disable = {},
+        },
+        ensure_installed = {
+          "css",
+          "html",
+          "javascript",
+          "typescript",
+          "bash",
+          "dockerfile",
+          "go",
+          "hcl",
+          "json",
+          "python",
+          "rust",
+          "yaml",
+          "toml",
+          "fish",
+          "lua",
+        },
+        autotag = {
+          enable = true,
+        },
+      }
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+    end,
+  })
+
+  -- Show indent line
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("indent_blankline").setup({
+        char = "▏",
+        show_first_indent_level = false,
+        show_trailing_blankline_indent = false,
+      })
+    end,
+  })
+
+  -- Show tree
+  use({
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+    'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+    config = function()
+      require("nvim-tree").setup()
+    end,
+  })
+
+  -- Show background
+  use({
+    "xiyaowong/nvim-transparent",
+    config = function()
+      require("transparent").setup {
+        enable = false,
+      }
+    end,
+  })
 end)
