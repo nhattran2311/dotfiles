@@ -38,7 +38,10 @@ vim.opt.termguicolors = true
 vim.opt.winblend = 0
 vim.opt.wildoptions = 'pum'
 vim.opt.pumblend = 5
+vim.cmd[[colorscheme tokyonight]]
 vim.o.background = 'dark'
+vim.g.tokyonight_style = "night"
+
 
 -- Set fold enable
 set.foldenable = true
@@ -53,10 +56,28 @@ set.listchars = {eol = '↲', tab = '▸ ', trail = '·'}
 set.clipboard:prepend { 'unnamed', 'unnamedplus' }
 
 -- Turn off paste mode when leaving insert
-vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = '*',
-  command = "set nopaste"
- })
+--  vim.api.nvim_create_autocmd("InsertLeave", {
+--    pattern = '*',
+--    command = "set nopaste"
+--   })
 
 -- Add asterirks in block comments
 set.formatoptions:append { 'r' }
+
+-- Transparent config
+require("transparent").setup({
+  enable = false, -- boolean: enable transparent
+  extra_groups = { -- table/string: additional groups that should be cleared
+    -- In particular, when you set it to 'all', that means all available groups
+
+    -- example of akinsho/nvim-bufferline.lua
+    "BufferLineTabClose",
+    "BufferlineBufferSelected",
+    "BufferLineFill",
+    "BufferLineBackground",
+    "BufferLineSeparator",
+    "BufferLineIndicatorSelected",
+  },
+  exclude = {}, -- table: groups you don't want to clear
+})
+
