@@ -140,9 +140,13 @@ return require('packer').startup(function(use)
     },
     config = function()
       vim.g.fzf_buffers_jump = 1
+      -- find file in global
       vim.keymap.set("n", "<leader><leader>", ":GFiles!<cr>'", { silent = true })
+      -- find the file 
       vim.keymap.set("n", "<leader>ff", ":Files!<cr>'", { silent = true })
+      -- open file
       vim.keymap.set("n", "<leader>fo", ":Files! " .. vim.fn.expand("%:p:h", { silent = true }))
+      -- search global
       vim.keymap.set("n", "<leader>/", ":Rg!<cr>", { silent = true })
       vim.keymap.set("n", "<leader>bb", ":Buffers!<cr>", { silent = true })
       vim.keymap.set("n", "<leader>,", ":Buffers!<cr>", { silent = true })
@@ -168,8 +172,6 @@ return require('packer').startup(function(use)
         ensure_installed = {
           "css",
           "html",
-          "javascript",
-          "typescript",
           "bash",
           "dockerfile",
           "go",
@@ -213,14 +215,17 @@ return require('packer').startup(function(use)
       require("nvim-tree").setup()
     end,
   })
+  use {"akinsho/toggleterm.nvim", tag = 'v2.*', config = function()
+    require("toggleterm").setup()
+  end}
 
   -- Show background
   use({
     "xiyaowong/nvim-transparent",
     config = function()
-      require("transparent").setup {
+      require("transparent").setup({
         enable = false,
-      }
+      })
     end,
   })
 end)
