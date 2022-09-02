@@ -22,7 +22,7 @@ set.smartcase = true -- do smart case matching
 set.ignorecase = true  -- do case insensitive matching
 set.linebreak = true
 set.wrap = true -- set no wrap lines
-
+set.swapfile = false
 -- Set indent
 set.autoindent = true
 set.smartindent = true
