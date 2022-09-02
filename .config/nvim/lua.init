@@ -1,3 +1,3 @@
 require('hori.base')
-require('hori.maps')
 require('hori.plugins')
+require('hori.maps')
