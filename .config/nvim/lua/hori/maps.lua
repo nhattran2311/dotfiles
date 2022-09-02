@@ -21,13 +21,13 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 
 -- Copy and paste with system clipboard
 
-vim.keymap.set("v", "<C-c>", '"+y', { silent = true })
-vim.keymap.set("i", "<C-v>", "<C-r>+", { silent = true })
+keymap.set("v", "<C-c>", '"+y', { silent = true })
+keymap.set("i", "<C-v>", "<C-r>+", { silent = true })
 
 -- Save and quit
 
-vim.keymap.set("n", "<C-s>", ":write<cr>", { silent = true })
-vim.keymap.set("n", "<C-q>", ":quit<cr>", { silent = true })
+keymap.set("n", "<C-s>", ":write<cr>", { silent = true })
+keymap.set("n", "<C-q>", ":quit<cr>", { silent = true })
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
@@ -66,12 +66,10 @@ keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
 
 -- Terminal windows  :PackerLoad toggleterm.lua<cr>:ToggleTerm<cr>
-keymap.set('n', "<C-m>", ":echo 'wrong key'<CR>")
--- keymap.set('t', '<Esc>', '<C-\><C-n>')
--- keymap.set('t', ':q!', '<C-\><C-n>:q!<CR>')
+keymap.set('n', "<C-t>", ":ToggleTerm<cr>", { silent = true })
+keymap.set('i', "<C-t>", "<C-\\><C-n>")
+keymap.set('t', "<C-t>", "<C-\\><C-n>:q!<CR>")
 
 -- Nvim Tree
-keymap.set("n", "<leader>d", ":PackerLoad nvim-tree.lua<cr>:NvimTreeToggle<CR>", { silent = true })
-
-keymap.set("n", "<S-q>", ":PackerLoad nvim-tree.lua<cr>:NvimTreeFocus<CR>", { silent = true })
-
+keymap.set("n", "<C-d>", ":PackerLoad nvim-tree.lua<cr>:NvimTreeToggle<CR>", { silent = true })
+keymap.set("n", "<C-f>", ":PackerLoad nvim-tree.lua<cr>:NvimTreeFocus<CR>", { silent = true })
