@@ -19,70 +19,53 @@ sudo visudo
 ```
 $USER ALL=(ALL) NOPASSWD: ALL
 ```
+## Copy dotfiles config
+```
+git clone https://github.com/nhattran2311/dotfile.git
+cd dotfile && cp .zshrc ~/.zshrc
+```
+
+```
+mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
+```
 
 ## NeoVim setup
 Requires Neovim (>= 0.7)
 - [Neovim](https://github.com/neovim/neovim)
-- [vim-plug](https://github.com/junegunn/vim-plug) - A minimalist Vim plugin manager
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - [Treesitter](https://github.com/tree-sitter/tree-sitter) configurations and abstraction layer for Neovim
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - A highly extendable fuzzy finder over lists
 ### Install NEOVIM
 
 ```
-# Assume you're in your home and it was downloaded to the Downloads folder - move it to a sensible location, e.g.
-mkdir -p ~/.local/share/nvim
-cd ~/.local/share/nvim/
-wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage
-# Mark it executable
+mkdir -p ~/.local/share/nvim && wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage -P ~/.local/share/nvim/
+```
+
+
+```
 chmod u+x nvim.appimage && ./nvim.appimage
-# Create .local/bin if it doesn't exist yet, and link the appimage there under the name "nvim"
-mkdir -p ~/.local/bin
-ln -s $HOME/.local/share/nvim/nvim.appimage ~/.local/bin/nvim
-```
-now you can type `nvim`
-<br />
-if it's not working you need add the PATH to ~/.profile or ~/.bashrc
-
-```
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
 ```
 
-### Copy Neovim config
+Create .local/bin if it doesn't exist yet, and link the appimage there under the name "nvim"
+
 ```
-mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
-```
-- maybe you will be get ^M format error so you need to install dos2unix and reformat all file.
-```
-sudo apt-get install tofrodos; sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
-```
-```
-dos2unix init.vim & dos2unix maps.vim & dos2unix plug.vim & dos2unix after/coc.rc.vim & dos2unix after/fzf.rc.vim & dos2unix after/lightline.rc.vim & dos2unix after/nerdtree.rc.vim &  dos2unix after/telescope.rc.vim
-```
-### Install VimPLug
-```
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
-Now you can install plugin.
-```
-nvim  ~/.config/nvim/init.vim
-:PlugInstall
+mkdir -p ~/.local/bin && ln -s $HOME/.local/share/nvim/nvim.appimage ~/.local/bin/nvim
 ```
 
-If you want to update plug.vim or vim config some commands below will help you get out the stuff:
+### Install Packer
+```
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+```
+
+
+```
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+```
+- Now you can enable tokyotheme in ~/.config/nvim/lua/hori/base.lua
+- If you want to update plug.vim or vim config some commands below will help you get out the stuff:
 * `:checkhealth` - after install plugin you can type this command for list issues of neovim
 * `:verbose imap <tab>` - for checking hotkey already mapped, if you want to add new hotkey should run this command first
 * `:so %` - for `source <current file>`
 * after install if have any error you can refer my [Error-List](#error-list)
 
-## Uninstall Neovim
-```
-cd ~/.local/share/nvim/
-rm -rf nvim.appimage
-```
 
 
 ## Shell setup
@@ -90,7 +73,6 @@ rm -rf nvim.appimage
 - ZSH shell
 - [OHMYZSH](https://github.com/ohmyzsh/ohmyzsh)
 - [ZINIT](https://github.com/zdharma-continuum/zinit)
-- [p10k](https://github.com/romkatv/powerlevel10k)
 - [Nerd fonts](https://github.com/ryanoasis/nerd-fonts) - Powerline-patched fonts. I use DroidSansMono.
 - [Exa](https://the.exa.website/) - `ls` replacement
 
@@ -101,14 +83,6 @@ rm -rf nvim.appimage
 
 `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
-- bind-key for OHMYZSH(already added in my .zshrc)
-`bindkey '^ ' autosuggest-accept`
-from here you can copy my .zsh to ~/.zshrc
-### Copy ZSH config
-```
-git clone https://github.com/nhattran2311/dotfile.git
-cd dotfile && cp .zshrc ~/.zshrc && cp .bashrc ~/.bashrc
-```
 <br />
 
 ### ZSH plugin 
@@ -220,9 +194,25 @@ curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/down
 https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 issue #6227
 
+4. file format
+- maybe you will be get ^M format error so you need to install dos2unix and reformat all file.
+```
+sudo apt-get install tofrodos; sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
+```
+```
+dos2unix init.vim & dos2unix maps.vim & dos2unix plug.vim & dos2unix after/coc.rc.vim & dos2unix after/fzf.rc.vim & dos2unix after/lightline.rc.vim & dos2unix after/nerdtree.rc.vim &  dos2unix after/telescope.rc.vim
+```
 
 ### FOR WHO USING VISUAL STUDIO CODE
 add this config to VSC for fix icon format.
 ```
  "terminal.integrated.fontFamily": "DroidSansMono Nerd Font",
 ```
+
+
+## Uninstall Neovim
+```
+cd ~/.local/share/nvim/
+rm -rf nvim.appimage
+```
+
