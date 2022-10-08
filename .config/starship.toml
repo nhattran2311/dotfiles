@@ -1,0 +1,94 @@
+[azure]
+disabled = false
+format = "on [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[➜](bold red) "
+
+[directory]
+read_only = " "
+truncation_length = 1
+
+[docker_context]
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+format = "via [🐋 $context](blue bold)"
+
+[git_branch]
+symbol = "🌱 "
+style="bold purple"
+
+[cmake]
+disabled = true
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+format = "via [$symbol]($style)"
+
+[elixir]
+symbol = " "
+format = 'via [$symbol]($style)'
+
+[elm]
+symbol = " "
+
+[golang]
+symbol = " "
+format = 'via [$symbol]($style)'
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+format = 'via [$symbol]($style)'
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+format = 'via [$symbol]($style)'
+
+[package]
+symbol = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+format = 'via [$symbol]($style)'
+
+[ruby]
+symbol = " "
+
+[rust]
+format = 'via [$symbol]($style)'
+
+[scala]
+symbol = " "
+
+[shlvl]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
+format = 'via [$symbol]($style)'
