@@ -1,5 +1,4 @@
-![cover](./images/nvim.png)
-![Screenshot](./images/theme.png)
+![cover](./images/theme.png)
 ![Screenshot](./images/neovim.png)
 # Nhat's dotfiles
 
@@ -8,8 +7,7 @@ Below config are working on WSL2(Ubuntu 18 & Ubuntu 20)
 # Screenshots:
 ## Contents
 - NeoVim setup
-- Shell setup(ZSH)
-- EXA - `ls` relacement
+- ZSH
 
 ## Pre-Setup
 Disable sudo password for user - replace $USER to your username
@@ -29,7 +27,7 @@ cd dotfile && cp .zshrc ~/.zshrc
 mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
 ```
 
-## NeoVim setup
+## NeoVim
 Requires Neovim (>= 0.7)
 - [Neovim](https://github.com/neovim/neovim)
 ### Install NEOVIM
@@ -68,15 +66,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 
 
-## Shell setup
-
-- ZSH shell
-- [OHMYZSH](https://github.com/ohmyzsh/ohmyzsh)
-- [ZINIT](https://github.com/zdharma-continuum/zinit)
-- [Nerd fonts](https://github.com/ryanoasis/nerd-fonts) - Powerline-patched fonts. I use DroidSansMono.
-- [Exa](https://the.exa.website/) - `ls` replacement
-
-
+## ZSH
 ### Install ZSH
 `sudo apt install zsh`
 - INSTALL OHMYZSH
@@ -93,14 +83,14 @@ cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/DarrinTisdale/zsh
 ```
 
 
-### p10k
+### Starship
 - Install:
 ```
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+curl -sS https://starship.rs/install.sh | sh
 ```
-- Copy p10k configure:
+- Copy configure:
 ```
-cp .p10k.zsh ~/.p10k.zsh
+cp .config/starship.toml ~/.config/starship.toml
 ```
 
 ### EXA
@@ -137,7 +127,7 @@ This plugin us required for fzf to search file in neovim
 sudo apt-get install ripgrep
 ```
 
-### Make all things work
+### Lastly
 `source ~/.zshrc`
 
 ### INSTALL NERDFONT FOR WSL2
