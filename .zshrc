@@ -1,15 +1,11 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-# 
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+    source ~/.profile
+fi
 TERM=xterm-256color
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
@@ -49,18 +45,8 @@ zinit light-mode for \
 # load customisation environment variables if available
 [[ ! -f ~/.env ]] || source ~/.env
 
-export ZSH="/home/tnh5hc/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
-    source ~/.profile
-fi
 plugins=(
   git
   zsh-autosuggestions
@@ -73,7 +59,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-bindkey '^ ' autosuggest-accept
 
 
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -81,13 +66,17 @@ export PATH="$HOME/.cargo/bin:$PATH"
 alias sde='docker-compose build --pull dev-env && docker-compose run --rm dev-env'
 alias ls='exa --icons --colour=always -l'
 alias lst='exa --icons --colour=always --tree --level=2 -l'
+alias gne='git add . && git commit --amend --no-edit && git push -f'
+alias gdb='git branch | grep -v "develop" | grep -v "master" | xargs git branch -D'
 
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5,underline'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
+bindkey '^ ' autosuggest-accept
+bindkey '^f' forward-word
+bindkey '^b'   backward-word
 
 # zinit pack"binary" for fzf
+
 zinit wait lucid light-mode for \
   atinit'zicompinit' \
     Aloxaf/fzf-tab \
@@ -120,23 +109,19 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # ytakahashi/igit \
 
 
-# todo autojump https://github.com/wting/autojump
-# custom prompt symbol when running in docker container
-# to use this add 'dockerenv' to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS in ~/.p10k.zsh (e.g. before prompt_char)
-function prompt_dockerenv() {
-    if [ -f /.dockerenv ]; then
-        p10k segment  -i '🐳'
-    fi
-}
-
-# load powerlevel10k config and plugin
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice depth=1; zinit light romkatv/powerlevel10k
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
     atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"'
 zinit light trapd00r/LS_COLORS
+eval "$(starship init zsh)"
 
+export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+groups_list() {
+# usage: 
+#   groups_list -> list groups for current user
+#   groups_list <user>  -> list groups for specific user
+    
+    user=$1
+    for i in $(id -G $user);do echo "$(getent group $i | cut -d: -f1)" ;done
+}
