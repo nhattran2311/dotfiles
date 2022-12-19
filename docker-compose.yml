@@ -1,4 +1,4 @@
-# export UID=$(id -u) && export GID=$(id -g) && docker-compose build dotfile && docker-compose run --rm -it dotfile:latest
+# export CONTAINER_UID=$(id -u) && export CONTAINER_GID=$(id -g) && export CONTAINER_USER=$(whoami) && docker-compose build dotfile && docker compose run --rm  dotfile
 version: '3.7'
 services:
   dotfile:
