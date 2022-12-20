@@ -35,10 +35,11 @@ Requires Neovim (>= 0.7)
 ```
 mkdir -p ~/.local/share/nvim && wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage -P ~/.local/share/nvim/
 ```
-
-
 ```
-chmod u+x nvim.appimage && ./nvim.appimage
+sudo apt install fuse
+```
+```
+chmod u+x ~/.local/share/nvim/nvim.appimage && ~/.local/share/nvim/nvim.appimage
 ```
 
 Create .local/bin if it doesn't exist yet, and link the appimage there under the name "nvim"
