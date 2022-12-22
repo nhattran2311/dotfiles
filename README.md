@@ -80,7 +80,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 - Install autosuggestion,zsh-aliases-exa for zshrc
 
 ```
-cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/DarrinTisdale/zsh-aliases-exa && git clone https://github.com/zsh-users/zsh-autosuggestions.git
+git clone https://github.com/DarrinTisdale/zsh-aliases-exa ~/.oh-my-zsh/custom/plugin && git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugin
 ```
 
 
