@@ -69,10 +69,10 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 ## ZSH
 ### Install ZSH
-`sudo apt install zsh`
+```sudo apt install zsh```
 - INSTALL OHMYZSH
 
-`sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+```sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"```
 
 <br />
 
@@ -99,21 +99,25 @@ cp .config/starship.toml ~/.config/starship.toml
 `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 Press 1 to continue install.
 <br />
-
+```
+source "$HOME/.cargo/env"
+```
 - Install EXA
-`cargo install exa`
+```
+cargo install exa
+```
 
 - You also can install it manually by following command:
 ```
-wget -c https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip
-unzip exa-linux-x86_64-0.9.0.zip
+wget -c https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip &&
+unzip exa-linux-x86_64-0.9.0.zip &&
 sudo mv exa-linux-x86_64 /usr/local/bin/exa
 ```
 
 #### Issue:
 Rust Error “linker ‘cc’ not found” On Linux
 solution:
-`sudo apt install build-essential`
+```sudo apt install build-essential```
 
 
 ### fzf
@@ -129,7 +133,7 @@ sudo apt-get install ripgrep
 ```
 
 ### Lastly
-`source ~/.zshrc`
+```source ~/.zshrc```
 
 ### INSTALL NERDFONT FOR WSL2
 DOWNLOAD your font to Windows PC:
