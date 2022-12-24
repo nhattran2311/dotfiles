@@ -2,10 +2,10 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
-    source ~/.profile
-fi
+#if [ -f ~/.bashrc ]; then
+#    source ~/.bashrc
+#    source ~/.profile
+#fi
 TERM=xterm-256color
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
