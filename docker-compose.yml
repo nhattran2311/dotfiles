@@ -1,22 +1,19 @@
-# export CONTAINER_UID=$(id -u) && export CONTAINER_GID=$(id -g) && export CONTAINER_USER=$(whoami) && docker-compose build dotfile && docker compose run --rm  dotfile
+# export CONTAINER_UID=$(id -u) && export CONTAINER_GID=$(id -g) && export CONTAINER_USER=$(whoami) && docker-compose build dotfile && docker compose run dotfile
+# sudo tcpdump -I etho -w /tmp/tcpdump.pcap
 version: '3.7'
 services:
-  dotfile:
-    build:
-      context: .
-      args:
-        DockerUSER: ${CONTAINER_USER}
-        DockerUID: ${CONTAINER_UID}
-        DockerGID: ${CONTAINER_GID}
-    network_mode: host  # this parameter is used during run
-    tty: true
-    volumes:
-      - /etc/group:/etc/group:ro
-      - /etc/passwd:/etc/passwd:ro
-      - /etc/shadow:/etc/shadow:ro
-      - .:${HOME}/mnt/ws
-      - ${HOME}/commandhistory.d/docker:${HOME}/commandhistory
-      - ${HOME}/.vscode-server:${HOME}/.vscode-server
-      - ${HOME}/.ssh:${HOME}/.ssh:ro
-      - ${HOME}/.gitconfig:${HOME}/.gitconfig
-    working_dir: ${HOME}/mnt/ws
+    dotfile:
+        build:
+            args:
+                DockerUSER: ${CONTAINER_USER}
+                DockerUID: ${CONTAINER_UID}
+                DockerGID: ${CONTAINER_GID}
+                # for wsl2
+                https_proxy: "http://172.17.0.1:3128"
+                http_proxy: "http://172.17.0.1:3128"
+        privileged: true
+        volumes:
+            - .:${HOME}/mnt/ws
+            - ${HOME}/.ssh:${HOME}/.ssh:ro
+            - ./tmp:/tmp
+        working_dir: ${HOME}/mnt/ws
