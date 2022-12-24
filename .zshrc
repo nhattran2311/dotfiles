@@ -43,9 +43,10 @@ bindkey '^b'   backward-word
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
 export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
-
-eval "$(starship init zsh)"
 source $ZSH/oh-my-zsh.sh
+# keep this line below oh-my-zsh
+eval "$(starship init zsh)"
+
 
 groups_list() {
 # usage: 
