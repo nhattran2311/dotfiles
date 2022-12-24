@@ -3,7 +3,8 @@
 # Nhat's dotfiles
 
 **Warning**: Don’t blindly use my settings unless you know what that entails. Use at your own risk! <br />
-Below config are working on WSL2(Ubuntu 18 & Ubuntu 20)
+The below config is working on WSL2(Ubuntu 18 & Ubuntu 20) & Kali Linux & Docker Enviroment.
+
 # Screenshots:
 ## Contents
 - NeoVim setup
@@ -14,6 +15,7 @@ Disable sudo password for user - replace $USER to your username
 ```
 sudo visudo
 ```
+<br/>
 ```
 $USER ALL=(ALL) NOPASSWD: ALL
 ```
@@ -21,11 +23,11 @@ $USER ALL=(ALL) NOPASSWD: ALL
 ```
 git clone https://github.com/nhattran2311/dotfile.git dotfile
 ```
-<br\>
+<br/>
 ```
 cd dotfile && cp .zshrc ~/.zshrc
 ```
-<br\>
+<br/>
 ```
 mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
 ```
@@ -109,7 +111,9 @@ source "$HOME/.cargo/env"
 ```
 <br />
 - Install EXA
+
 <br />
+
 ```
 cargo install exa
 ```
