@@ -19,10 +19,13 @@ $USER ALL=(ALL) NOPASSWD: ALL
 ```
 ## Copy dotfiles config
 ```
-git clone https://github.com/nhattran2311/dotfile.git
+git clone https://github.com/nhattran2311/dotfile.git dotfile
+```
+<br\>
+```
 cd dotfile && cp .zshrc ~/.zshrc
 ```
-
+<br\>
 ```
 mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
 ```
@@ -96,13 +99,17 @@ cp .config/starship.toml ~/.config/starship.toml
 
 ### EXA
 - INSTALL Rust Enviroment
-`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 Press 1 to continue install.
 <br />
 ```
 source "$HOME/.cargo/env"
 ```
+<br />
 - Install EXA
+<br />
 ```
 cargo install exa
 ```
