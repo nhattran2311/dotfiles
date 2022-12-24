@@ -15,7 +15,7 @@ Disable sudo password for user - replace $USER to your username
 ```
 sudo visudo
 ```
-<br/>
+<br />
 ```
 $USER ALL=(ALL) NOPASSWD: ALL
 ```
@@ -23,11 +23,11 @@ $USER ALL=(ALL) NOPASSWD: ALL
 ```
 git clone https://github.com/nhattran2311/dotfile.git dotfile
 ```
-<br/>
+<br />
 ```
 cd dotfile && cp .zshrc ~/.zshrc
 ```
-<br/>
+<br />
 ```
 mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
 ```
