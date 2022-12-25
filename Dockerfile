@@ -59,12 +59,12 @@ USER ${DockerUID}:${DockerGID}
 RUN echo "APT::Get::Assume-Yes=yes" > /tmp/_tmp_apt.conf \
     && export APT_CONFIG=/tmp/_tmp_apt.conf
 
-RUN git clone https://github.com/nhattran2311/dotfile.git /home/${DockerUSER}/dotfile
-WORKDIR /home/${DockerUSER}/dotfile
+# RUN git clone https://github.com/nhattran2311/dotfile.git /home/${DockerUSER}/dotfile
+# WORKDIR /home/${DockerUSER}/dotfile
 
 # Get Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-RUN source "$HOME/.cargo/env"
+# RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# RUN source "$HOME/.cargo/env"
 
 
 # NEOVIM
@@ -76,15 +76,15 @@ RUN source "$HOME/.cargo/env"
 #     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # ZSH STARSHIP FZF
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
-RUN cp .config/starship.toml ~/.config/starship.toml
-RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+# RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
+# RUN cp .config/starship.toml ~/.config/starship.toml
+# RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 # change shell
-SHELL ["/bin/zsh", "-euxo", "pipefail", "-c"]
-RUN cargo install exa
+# SHELL ["/bin/zsh", "-euxo", "pipefail", "-c"]
+# RUN cargo install exa
 
-ENTRYPOINT [ "/bin/zsh", "-il", "-c"]
-CMD ["/bin/zsh", "-il"]
+ENTRYPOINT [ "/bin/bash", "-il", "-c"]
+CMD ["/bin/bash", "-il"]
 
