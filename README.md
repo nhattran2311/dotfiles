@@ -1,4 +1,4 @@
-![cover](./images/neovim_wsl.png))
+![cover](./images/neovim_wsl.png)
 
 # Nhat's dotfiles
 
