@@ -1,3 +1,16 @@
+
+scan_timeout = 10
+add_newline = false
+
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = 'bold blue'
+symbol = '🅰 '
+
+[aws.region_aliases]
+ap-southeast-2 = 'au'
+us-east-1 = 'va'
+
 [azure]
 disabled = true
 format = "on [$symbol($subscription)]($style) "
@@ -20,7 +33,7 @@ format = "via [🐋 $context](blue bold)"
 [git_branch]
 symbol = "🌱 "
 style="bold purple"
-
+ 
 [git_status]
 ahead = "⇡${count}"
 behind = "⇣${count}"
