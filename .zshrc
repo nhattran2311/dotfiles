@@ -37,16 +37,15 @@ bindkey '^ ' autosuggest-accept
 bindkey '^f' forward-word
 bindkey '^b'   backward-word
 
-# load customisation environment variables if available
-[[ ! -f ~/.env ]] || source ~/.env
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# load customization environment variables if available
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
 export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 source $ZSH/oh-my-zsh.sh
 # keep this line below oh-my-zsh
 eval "$(starship init zsh)"
-
+[[ ! -f ~/.env ]] || source ~/.env
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 groups_list() {
 # usage: 
