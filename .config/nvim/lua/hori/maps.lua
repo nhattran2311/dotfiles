@@ -24,6 +24,14 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 keymap.set("v", "<C-c>", '"+y', { silent = true })
 keymap.set("i", "<C-v>", "<C-r>+", { silent = true })
 
+-- Copy path in Nvim Tree
+vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
+vim.api.nvim_create_user_command("CopyFullPath", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {})
+
 -- Save and quit
 
 keymap.set("n", "<C-s>", ":write<cr>", { silent = true })
