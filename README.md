@@ -214,7 +214,10 @@ add this config to VSC for fixed icon format.
  "terminal.integrated.fontFamily": "DroidSansMono Nerd Font",
 ```
 
-
+## Check keybinding for Linux
+```
+bindkey | grep '^"^R'
+```
 ## Uninstall Neovim
 ```
 cd ~/.local/share/nvim/
