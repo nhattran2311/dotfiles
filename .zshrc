@@ -27,7 +27,6 @@ plugins=(
   docker-compose
   tmux
   kubectl
-  zsh-aliases-exa
   zsh-syntax-highlighting
 )
 
