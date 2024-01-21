@@ -1,12 +1,7 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-#if [ -f ~/.bashrc ]; then
-#    source ~/.bashrc
-#    source ~/.profile
-#fi
-[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+[[ -e ~/.profile ]] && source ~/.profile
 TERM=xterm-256color
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
@@ -61,7 +56,7 @@ groups_list() {
     user=$1
     for i in $(id -G $user);do echo "$(getent group $i | cut -d: -f1)" ;done
 }
-#export MINIKUBE_IP=192.168.49.2
+export MINIKUBE_IP=192.168.49.2
 #export docker_http_proxy=$http_proxy
 #export docker_https_proxy=$https_proxy
 #export {HTTP,HTTPS}_PROXY=http://192.168.49.1:3128
