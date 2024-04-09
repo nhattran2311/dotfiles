@@ -1,13 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin/:$HOME/.cargo/bin:/usr/local/go/bin:$PATH
 
-[[ -e ~/.profile ]] && source ~/.profile
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 TERM=xterm-256color
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=$(( 1.2 * SAVEHIST )) # Zsh recommended value
 export HISTTIMEFORMAT="[%F %T] "
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_VERIFY
+autoload -Uz compinit && compinit
+setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_VERIFY HIST_IGNORE_ALL_DUPS
 ENABLE_CORRECTION="true"
 # load customisation environment variables if available
 [[ ! -f ~/.env ]] || source ~/.env
@@ -27,8 +28,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-
-export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin"
 
 alias sde='docker-compose build --pull dev-env && docker-compose run --rm dev-env'
 alias ls='exa --icons --colour=always -l'
@@ -56,10 +55,6 @@ groups_list() {
     user=$1
     for i in $(id -G $user);do echo "$(getent group $i | cut -d: -f1)" ;done
 }
-export MINIKUBE_IP=192.168.49.2
-#export docker_http_proxy=$http_proxy
-#export docker_https_proxy=$https_proxy
-#export {HTTP,HTTPS}_PROXY=http://192.168.49.1:3128
-#export {http,https}_proxy=http://192.168.49.1:3128
-#export no_proxy=$no_proxy,$MINIKUBE_IP
-#export NO_PROXY=$no_proxy
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
