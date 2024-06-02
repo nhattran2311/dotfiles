@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin/:$HOME/.cargo/bin:/usr/local/go/bin:$PATH
 
-[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile' || true
 TERM=xterm-256color
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
@@ -11,7 +11,7 @@ autoload -Uz compinit && compinit
 setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_VERIFY HIST_IGNORE_ALL_DUPS
 ENABLE_CORRECTION="true"
 # load customisation environment variables if available
-[[ ! -f ~/.env ]] || source ~/.env
+[[ ! -f ~/.env ]] || source ~/.env || true
 
 export ZSH="$HOME/.oh-my-zsh"
 
