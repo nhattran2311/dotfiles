@@ -193,18 +193,6 @@ return require('packer').startup(function(use)
     end,
   })
 
-  -- Show indent line
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("indent_blankline").setup({
-        char = "▏",
-        show_first_indent_level = false,
-        show_trailing_blankline_indent = false,
-      })
-    end,
-  })
-
   -- Show tree
   use({
     'kyazdani42/nvim-tree.lua',
