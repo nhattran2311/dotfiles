@@ -69,7 +69,7 @@ RUN echo "APT::Get::Assume-Yes=yes" > /tmp/_tmp_apt.conf \
 
 # NEOVIM
 # RUN cp .zshrc ~/.zshrc && mkdir -p ~/.config/nvim/ && cp -r .config/nvim/* ~/.config/nvim
-# RUN mkdir -p ~/.local/share/nvim && wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage -P ~/.local/share/nvim/
+# RUN mkdir -p ~/.local/share/nvim && wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim.appimage -P ~/.local/share/nvim/
 # RUN chmod u+x ~/.local/share/nvim/nvim.appimage && ~/.local/share/nvim/nvim.appimage
 # RUN mkdir -p ~/.local/bin && ln -s $HOME/.local/share/nvim/nvim.appimage ~/.local/bin/nvim
 # RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
