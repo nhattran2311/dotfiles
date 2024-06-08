@@ -56,5 +56,6 @@ groups_list() {
     for i in $(id -G $user);do echo "$(getent group $i | cut -d: -f1)" ;done
 }
 export NVM_DIR="$HOME/.nvm"
+export GPG_TTY=$(tty)
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
