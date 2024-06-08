@@ -49,7 +49,7 @@ Requires Neovim (>= 0.7)
 Download and place the Neovim app image in the appropriate directory.
 
 ```
-mkdir -p ~/.local/share/nvim && wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage -P ~/.local/share/nvim/
+mkdir -p ~/.local/share/nvim && wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim.appimage -P ~/.local/share/nvim/
 ```
 
 Install fuse:
@@ -262,7 +262,7 @@ To update Neovim, you can simply download the latest app image and replace the e
 ```
 cd ~/.local/share/nvim/
 rm -rf nvim.appimage
-wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage
+wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim.appimage
 chmod u+x nvim.appimage
 ```
-Remember to replace `v0.7.0` with the version number of the latest release.
+Remember to replace `v0.10.0` with the version number of the latest release.
